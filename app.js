@@ -1,11 +1,11 @@
 var app = angular.module('miTienda', []);
 
-app.factory('productoFactory', function() {
+app.factory('Producto', function() {
 	var productos = [{
 		nombre: 'FUJIFILM FinePix S8600',
 		precio: 149.00,
 		imagen: 'img/fujifilm.jpg',
-		stock: 5
+		stock: 15
 	}, {
 		nombre: 'PANASONIC TX-55AS650E',
 		precio: 1499.00,
@@ -33,25 +33,27 @@ app.factory('productoFactory', function() {
 			return productos;
 		},
 		stockClass: function(stock) {
-			if(stock >= 15)
+			console.log("stock: " + stock);
+			if(stock >= 15){
 				return 'label-success';
-			else if(stock === 0)
+			} else if(stock === 0) {
 				return 'label-danger';
-			else
+			} else {
 				return 'label-warning';
+			}
 		}
 	}
 });
 
-app.controller('TiendaController', function($scope, productoFactory) {
+app.controller('TiendaController', function($scope, Producto) {
 
-	$scope.articulos = productoFactory.getProductos();
+	$scope.articulos = Producto.getProductos();
 	
-	$scope.changeClass = function () {
-		return productoFactory.stockClass();
+	$scope.changeClass = function(stock) {
+		return Producto.stockClass(stock);
 	}
-
-	$scope.addCar = function (articulo) {
-		console.log("vendido " + articulo.nombre);
+	
+	$scope.addCar = function() {
+		return Producto.addCar();
 	}
 });
