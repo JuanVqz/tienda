@@ -8,21 +8,21 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 	<script src="app.js"></script>
 </head>
-<body ng-controller="TiendaController as tienda">
+<body ng-controller="TiendaController">
     <div class="container">
 		<h3 class="text-center">Mi tienda</h3>
 		<hr>
-		<div ng-repeat="articulo in tienda.articulos" class="col col-sm-6 col-md-4">
+		<div ng-repeat="articulo in articulos" class="col col-sm-6 col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h6 class="text-left">
 						{{ articulo.nombre }}
-						<span class="pull-right label" ng-class="tienda.stockClass({{ articulo.stock }})" style="font-size: 1.5em; padding: 18px;">
+						<span class="pull-right label" ng-class="changeClass({{ articulo.stock }})" style="font-size: 1.5em; padding: 18px;">
 							Stock: {{ articulo.stock }}
 						</span>
 					</h6>
@@ -30,7 +30,7 @@
 				<div class="panel-body text-center">
 					<img ng-src="{{ articulo.imagen }}" class="img-responsive">
 					<div class="pull-left" style="padding-top:10px;">{{ articulo.precio | currency }}</div>
-					<button type="button" class="btn btn-primary pull-right" ng-click="tienda.addCar(articulo)" ng-disabled="articulo.stock===0">
+					<button type="button" class="btn btn-primary pull-right" ng-click="addCar(articulo)" ng-disabled="articulo.stock===0">
                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
 						Añadir al carro
 					</button>
